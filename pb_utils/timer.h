@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-namespace utils {
+namespace pb_utils {
 class Timer {
 private:
   using Clock = std::chrono::high_resolution_clock;
@@ -31,4 +31,4 @@ public:
     std::cout << _label << " took " << duration.count() << " seconds.\n";
   }
 };
-} // namespace utils
+} // namespace pb_utils

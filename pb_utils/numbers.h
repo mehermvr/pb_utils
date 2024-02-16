@@ -1,5 +1,6 @@
 #pragma once
-#include <numbers>
-namespace utils {
-constexpr auto PI = std::numbers::pi_v<double>;
-}
+
+namespace pb_utils {
+double rad2deg(const double radians);
+double deg2rad(const double degrees);
+} // namespace pb_utils
