@@ -1,0 +1,8 @@
+BasedOnStyle: LLVM
+ColumnLimit: 120
+BinPackArguments: true
+BinPackParameters: false
+PackConstructorInitializers: NextLine
+PointerAlignment: Left
+AlwaysBreakTemplateDeclarations: Yes
+AlignArrayOfStructures: Right
