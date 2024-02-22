@@ -26,7 +26,10 @@ public:
 
   void tick() { _tick = Clock::now(); }
   // returns the seconds since the tick(), otherwise since initialization
-  auto tock() const { return (Clock::now() - _tick).count(); }
+  auto tock() const {
+    Duration duration = Clock::now() - _tick;
+    return duration.count();
+  }
 
   ~Timer() {
     auto end_time = Clock::now();
