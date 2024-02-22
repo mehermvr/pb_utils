@@ -4,6 +4,7 @@
 namespace pb_utils {
 double rad2deg(const double radians);
 double deg2rad(const double degrees);
+double wrap_to_2pi(double angle_deg);
 
 /* use for narrowing conversions. and avoid using this one c++26 becomes available. i
  * have not really studied in detail the gcc implementation for this */
