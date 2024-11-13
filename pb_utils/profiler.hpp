@@ -42,16 +42,15 @@ public:
       : name(std::move(name_)), print_frequency(print_frequency) {}
   void tick() { start_time = Clock::now(); };
   void tock() {
-    total_time += Clock::now() - start_time;
+    total_time += std::chrono::duration(Clock::now() - start_time).count();
     ++count;
   };
   ~Profiler() {
-    const double total_duration = std::chrono::duration_cast<Duration>(total_time).count();
-    const double average_time = count > 0 ? total_duration / count : 0;
-    const double average_time_in_seconds = average_time * Duration::period::num / Duration::period::den;
-    const double frequency = average_time_in_seconds > 0 ? (1.0 / average_time_in_seconds) : 0.0;
-    std::cout << name << " - Profiling results:\nExecution count: " << count
-              << "\nAverage time: " << std::format("{:.2f}", average_time) << UnitString << "." << std::endl;
+    const double average_time = count > 0 ? total_time / count : 0;
+    const double frequency = average_time > 0 ? (1.0 / average_time) : 0.0;
+    std::cout << name << " - Profiling results:\nExecution count: " << count << "\nAverage time: "
+              << std::format("{:.2f}", average_time * Duration::period::den / Duration::period::num) << UnitString
+              << "." << std::endl;
     if (print_frequency) {
       std::cout << "Average Frequency: " << std::format("{:.2f}", frequency) << "Hz." << std::endl;
     }
@@ -60,7 +59,7 @@ public:
 private:
   std::string name;
   TimePoint start_time;
-  TimePoint total_time;
+  double total_time;
   size_t count = 0;
   bool print_frequency;
 };
