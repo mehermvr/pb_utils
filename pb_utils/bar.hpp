@@ -21,6 +21,6 @@ public:
   size_t total_count = 0;
   TimePoint start_time;
   TimePoint last_print_time;
-  double print_gap_time = 1; // second
+  long print_gap_time = 1; // second
 };
 } // namespace pb_utils
