@@ -46,7 +46,7 @@ public:
     ++count;
   };
   ~Profiler() {
-    const double average_time = count > 0 ? total_time / count : 0;
+    const double average_time = count > 0 ? (total_time / std::nano::den) / count : 0;
     const double frequency = average_time > 0 ? (1.0 / average_time) : 0.0;
     std::cout << name << " - Profiling results:\nExecution count: " << count << "\nAverage time: "
               << std::format("{:.2f}", average_time * Duration::period::den / Duration::period::num) << UnitString
