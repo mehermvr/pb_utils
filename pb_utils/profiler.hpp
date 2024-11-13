@@ -5,6 +5,7 @@
 #include <string>
 #include <utility>
 
+namespace {
 // TODO: use std::derived_from instead
 template <typename T>
 concept ChronoDuration = std::is_base_of_v<std::chrono::duration<typename T::rep, typename T::period>, T>;
@@ -27,7 +28,9 @@ template <>
 constexpr std::string get_duration_unit<std::chrono::nanoseconds>() {
   return "ns";
 }
+} // namespace
 
+namespace pb_utils {
 template <ChronoDuration Duration>
 class Profiler {
 public:
@@ -61,3 +64,4 @@ private:
   size_t count = 0;
   bool print_frequency;
 };
+} // namespace pb_utils
