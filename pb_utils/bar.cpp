@@ -10,7 +10,7 @@ void bar::tick() {
   if (std::chrono::duration_cast<std::chrono::seconds>(current_time - last_print_time).count() > print_gap_time) {
     std::cout << count << " / " << total_count << " messages processed. "
               << "Estimated time remaining: " << std::format("{:.2f}", remaining_time) << " seconds."
-              << "\r";
+              << "\r" << std::flush;
     last_print_time = current_time;
   }
 }

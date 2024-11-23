@@ -9,9 +9,7 @@ void Profiler::tock() {
   ++count;
 };
 
-double Profiler::compute_average_time() const {
-  return count > 0 ? (total_time / std::nano::den) / static_cast<double>(count) : 0;
-}
+double Profiler::compute_average_time() const { return count > 0 ? (total_time) / static_cast<double>(count) : 0; }
 double Profiler::compute_frequency() const {
   const double average_time = compute_average_time();
   return average_time > 0 ? (1.0 / average_time) : 0.0;
