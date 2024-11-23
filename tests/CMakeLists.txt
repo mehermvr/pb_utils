@@ -1,2 +1,2 @@
-add_executable(test profiler_test.cpp)
-target_link_libraries(test pb_utils)
+add_executable(pb_utils_test profiler_test.cpp)
+target_link_libraries(pb_utils_test pb_utils)
