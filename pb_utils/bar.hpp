@@ -9,8 +9,8 @@ public:
   using TimePoint = std::chrono::time_point<Clock>;
 
   explicit bar(size_t total_count_)
-      : total_count(total_count_), start_time(Clock::now()), last_print_time(start_time){};
-  ~bar() { std::cout << std::endl; }
+      : total_count(total_count_), start_time(Clock::now()), last_print_time(start_time) {};
+  ~bar() { std::cout << '\n'; }
   bar(const bar&) = default;
   bar(bar&&) = delete;
   bar& operator=(const bar&) = default;

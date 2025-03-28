@@ -1,5 +1,5 @@
 #include "profiler.hpp"
-#include <format>
+#include <fmt/core.h>
 #include <iostream>
 
 namespace pb_utils {
@@ -16,9 +16,9 @@ double Profiler::compute_frequency() const {
 }
 Profiler::~Profiler() {
   std::cout << name << " - Profiling results:\nExecution count: " << count
-            << "\nAverage time: " << std::format("{:.2f}", compute_average_time() * 1e3) << "ms." << std::endl;
+            << "\nAverage time: " << fmt::format("{:.2f}", compute_average_time() * 1e3) << "ms." << '\n';
   if (print_frequency) {
-    std::cout << "Average Frequency: " << std::format("{:.2f}", compute_frequency()) << "Hz." << std::endl;
+    std::cout << "Average Frequency: " << fmt::format("{:.2f}", compute_frequency()) << "Hz." << '\n';
   }
 }
 } // namespace pb_utils
