@@ -10,29 +10,30 @@ int main() {
   const int run_count = 5;
   // Test with 10 Hz frequency
   {
-    pb_utils::Profiler profiler("10 Hz Simulation");
     for (int i = 0; i < run_count; ++i) {
-      profiler.tick();
+      pb_utils::ScopedProfiler profiler("10 Hz Simulation");
       simulate(10.0);
-      profiler.tock();
     }
   }
   // Test with 5 Hz frequency
   {
-    pb_utils::Profiler profiler("5 Hz Simulation");
     for (int i = 0; i < run_count; ++i) {
-      profiler.tick();
+      pb_utils::ScopedProfiler profiler("5 Hz Simulation");
       simulate(5.0);
-      profiler.tock();
     }
   }
-  // Test with 1 Hz frequency
+  // Test with 10 Hz frequency
   {
-    pb_utils::Profiler profiler("1 Hz Simulation");
     for (int i = 0; i < run_count; ++i) {
-      profiler.tick();
-      simulate(1.0);
-      profiler.tock();
+      pb_utils::ScopedProfiler profiler("10 Hz Simulation");
+      simulate(10.0);
+    }
+  }
+  // Test with 10 Hz frequency
+  {
+    for (int i = 0; i < run_count; ++i) {
+      pb_utils::ScopedProfiler profiler("10 Hz Simulation");
+      simulate(10.0);
     }
   }
 }
