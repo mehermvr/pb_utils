@@ -60,4 +60,6 @@ private:
 
 } // namespace pb_utils
 
-#define SCOPED_PROFILER(name) pb_utils::ScopedProfiler profiler(name)
+#define CONCAT_IMPL(x, y) x##y
+#define CONCAT(x, y) CONCAT_IMPL(x, y)
+#define SCOPED_PROFILER(name) pb_utils::ScopedProfiler CONCAT(profiler_, __LINE__)(name)
