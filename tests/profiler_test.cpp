@@ -11,28 +11,28 @@ int main() {
   // Test with 10 Hz frequency
   {
     for (int i = 0; i < run_count; ++i) {
-      pb_utils::ScopedProfiler profiler("10 Hz Simulation");
+      SCOPED_PROFILER("10 Hz Simulation");
       simulate(10.0);
     }
   }
   // Test with 5 Hz frequency
   {
     for (int i = 0; i < run_count; ++i) {
-      pb_utils::ScopedProfiler profiler("5 Hz Simulation");
+      SCOPED_PROFILER("5 Hz Simulation");
       simulate(5.0);
     }
   }
   // Test with 10 Hz frequency
   {
     for (int i = 0; i < run_count; ++i) {
-      pb_utils::ScopedProfiler profiler("10 Hz Simulation");
+      SCOPED_PROFILER("10 Hz Simulation");
       simulate(10.0);
     }
   }
   // Test with 10 Hz frequency
   {
     for (int i = 0; i < run_count; ++i) {
-      pb_utils::ScopedProfiler profiler("10 Hz Simulation");
+      SCOPED_PROFILER("10 Hz Simulation");
       simulate(10.0);
     }
   }

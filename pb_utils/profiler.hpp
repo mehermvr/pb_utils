@@ -59,3 +59,5 @@ private:
 };
 
 } // namespace pb_utils
+
+#define SCOPED_PROFILER(name) pb_utils::ScopedProfiler profiler(name)
