@@ -18,7 +18,11 @@ public:
 
   ~ScopedProfiler() {
     auto& entry = profile_data.map[name];
-    entry.total += MilliSeconds(Clock::now() - start);
+    const MilliSeconds elapsed = Clock::now() - start;
+    if (elapsed > entry.max_time) {
+      entry.max_time = elapsed;
+    }
+    entry.total += elapsed;
     ++entry.count;
   }
 
@@ -31,6 +35,7 @@ private:
   struct ProfilingInfo {
     size_t count{0};
     MilliSeconds total{};
+    MilliSeconds max_time{};
   };
   class ProfilingInfoMap {
   public:
@@ -46,8 +51,11 @@ private:
         std::cout << fmt::format("{} - Profiling results:\n"
                                  "  Execution count: {}\n"
                                  "  Average time: {:.2f}ms\n"
-                                 "  Average frequency: {:.2f}Hz\n",
-                                 name, info.count, avg_ms.count(), 1 / Seconds(avg_ms).count());
+                                 "  Average frequency: {:.2f}Hz\n"
+                                 "  Max (worst-case) time: {:.2f}ms\n"
+                                 "  Worst-case frequency: {:.2f}Hz\n",
+                                 name, info.count, avg_ms.count(), 1 / Seconds(avg_ms).count(), info.max_time.count(),
+                                 1 / Seconds(info.max_time).count());
       }
     }
   };
