@@ -51,9 +51,12 @@ private:
     ProfilingInfoMap& operator=(const ProfilingInfoMap&) = delete;
     ProfilingInfoMap& operator=(ProfilingInfoMap&&) = delete;
     ~ProfilingInfoMap() {
+      if (!map.empty()) {
+        std::cout << "Profiling results\n";
+      }
       for (const auto& [name, info] : map) {
         const auto avg_ms = info.total / info.count;
-        std::cout << fmt::format("Profiling results\t-\t{}:\n"
+        std::cout << fmt::format("\t{}:\n"
                                  "\t\tExecution count: {}\n"
                                  "\t\tAverage time: {:.2f}ms\n"
                                  "\t\tAverage frequency: {:.2f}Hz\n"
