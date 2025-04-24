@@ -16,15 +16,20 @@ public:
   ScopedProfiler& operator=(const ScopedProfiler&) = delete;
   ScopedProfiler& operator=(ScopedProfiler&&) = delete;
 
-  ~ScopedProfiler() {
-    auto& entry = profile_data.map[name];
-    const MilliSeconds elapsed = Clock::now() - start;
-    if (elapsed > entry.max_time) {
-      entry.max_time = elapsed;
+  void finish() {
+    if (!finished) {
+      auto& entry = profile_data.map[name];
+      const MilliSeconds elapsed = Clock::now() - start;
+      if (elapsed > entry.max_time) {
+        entry.max_time = elapsed;
+      }
+      entry.total += elapsed;
+      ++entry.count;
+      finished = true;
     }
-    entry.total += elapsed;
-    ++entry.count;
   }
+
+  ~ScopedProfiler() { finish(); }
 
 private:
   using Clock = std::chrono::high_resolution_clock;
@@ -64,6 +69,7 @@ private:
 
   std::string name;
   TimePoint start;
+  bool finished = false;
 };
 
 } // namespace pb_utils
