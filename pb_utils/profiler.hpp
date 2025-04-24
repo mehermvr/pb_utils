@@ -31,6 +31,8 @@ public:
 
   ~ScopedProfiler() { finish(); }
 
+  static void print_results() { profile_data.print_results(); }
+
 private:
   using Clock = std::chrono::high_resolution_clock;
   using TimePoint = Clock::time_point;
@@ -50,7 +52,7 @@ private:
     ProfilingInfoMap(ProfilingInfoMap&&) = delete;
     ProfilingInfoMap& operator=(const ProfilingInfoMap&) = delete;
     ProfilingInfoMap& operator=(ProfilingInfoMap&&) = delete;
-    ~ProfilingInfoMap() {
+    void print_results() {
       if (!map.empty()) {
         std::cout << "Profiling results\n";
       }
@@ -66,6 +68,7 @@ private:
                                  1 / Seconds(info.max_time).count());
       }
     }
+    ~ProfilingInfoMap() { print_results(); }
   };
   // linker throws an error without the inline
   static inline ProfilingInfoMap profile_data;
