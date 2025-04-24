@@ -53,12 +53,12 @@ private:
     ~ProfilingInfoMap() {
       for (const auto& [name, info] : map) {
         const auto avg_ms = info.total / info.count;
-        std::cout << fmt::format("{} - Profiling results:\n"
-                                 "  Execution count: {}\n"
-                                 "  Average time: {:.2f}ms\n"
-                                 "  Average frequency: {:.2f}Hz\n"
-                                 "  Max (worst-case) time: {:.2f}ms\n"
-                                 "  Worst-case frequency: {:.2f}Hz\n",
+        std::cout << fmt::format("Profiling results\t-\t{}:\n"
+                                 "\t\tExecution count: {}\n"
+                                 "\t\tAverage time: {:.2f}ms\n"
+                                 "\t\tAverage frequency: {:.2f}Hz\n"
+                                 "\t\tMax (worst-case) time: {:.2f}ms\n"
+                                 "\t\tWorst-case frequency: {:.2f}Hz\n",
                                  name, info.count, avg_ms.count(), 1 / Seconds(avg_ms).count(), info.max_time.count(),
                                  1 / Seconds(info.max_time).count());
       }
