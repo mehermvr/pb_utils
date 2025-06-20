@@ -1,6 +1,6 @@
 #pragma once
 #include <chrono>
-#include <fmt/core.h>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -58,14 +58,15 @@ private:
       }
       for (const auto& [name, info] : map) {
         const auto avg_ms = info.total / info.count;
-        std::cout << fmt::format("\t{}:\n"
-                                 "\t\tExecution count: {}\n"
-                                 "\t\tAverage time: {:.2f}ms\n"
-                                 "\t\tAverage frequency: {:.2f}Hz\n"
-                                 "\t\tMax (worst-case) time: {:.2f}ms\n"
-                                 "\t\tWorst-case frequency: {:.2f}Hz\n",
-                                 name, info.count, avg_ms.count(), 1 / Seconds(avg_ms).count(), info.max_time.count(),
-                                 1 / Seconds(info.max_time).count());
+        std::cout << "\t" << name << ":\n"
+                  << "\t\tExecution count: " << info.count << "\n"
+                  << "\t\tAverage time: " << std::fixed << std::setprecision(2) << avg_ms.count() << "ms\n"
+                  << "\t\tAverage frequency: " << std::fixed << std::setprecision(2) << (1.0 / Seconds(avg_ms).count())
+                  << "Hz\n"
+                  << "\t\tMax (worst-case) time: " << std::fixed << std::setprecision(2) << info.max_time.count()
+                  << "ms\n"
+                  << "\t\tWorst-case frequency: " << std::fixed << std::setprecision(2)
+                  << (1.0 / Seconds(info.max_time).count()) << "Hz\n";
       }
     }
     ~ProfilingInfoMap() { print_results(); }
